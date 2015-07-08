@@ -1,0 +1,52 @@
+<section>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="sentence">
+                <div class="answer_field"></div>
+                (rice) were distributed to the flood victims.
+            </h3>
+        </div>
+    </div>
+</section>
+<style>
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 150px;
+}
+
+.answer_field >.form-control {
+    border: 0px !important;
+    outline: 0px !important;
+    box-shadow: 0px !important;
+    border-radius: 0px !important;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 23px;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Calibri";
+    padding-top: 50px;
+}
+
+.choosen {
+    -webkit-filter: drop-shadow(5px 5px 30px #E4C17A);
+    filter: drop-shadow(5px 5px 30px #E4C17A);
+}
+</style>
+<script>
+(function() {
+    console.log("currentQuestion", currentQuestion, "current", current);
+    $('.sentence').html(currentQuestion.question_text);
+
+    var template = '<input type="text" id="answer_field" class="form-control" value="" required="required" pattern="" title="">';
+
+    $('.answer_field').html($(template));
+    $('#answer_field').change(function() {
+        console.log($(this).val());
+    });
+})();
+</script>

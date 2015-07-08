@@ -1,0 +1,52 @@
+<section>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="sentence">
+                <div class="answer_field"></div>
+                (rice) were distributed to the flood victims.
+            </h3>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:5%">
+            <a href="#" class="btn_box_blue">Fifty sacks of rice</a>
+            <a href="#" class="btn_box_blue" style="margin-left:20px">Fifty barrels of rice</a>
+        </div>
+    </div>
+</section>
+<style>
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 250px;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Calibri";
+}
+
+.choosen {
+    -webkit-filter: drop-shadow(5px 5px 30px #E4C17A);
+    filter: drop-shadow(5px 5px 30px #E4C17A);
+}
+</style>
+<script>
+(function() {
+    console.log(currentQuestion);
+    $('.sentence').html(currentQuestion.question_text);
+    var totalItemWidth = 0;
+
+
+    $.each($('.btn_box_orange'), function(i, v) {
+        totalItemWidth += $(v).width();
+    });
+
+    $('.selection').width((totalItemWidth + 20) * 3);
+
+    $('.btn_box_blue').click(function() {
+        $('.btn_box_blue').removeClass("choosen");
+        $(this).addClass("choosen");
+        $('.answer_field').html($(this).text());
+    });
+})();
+</script>

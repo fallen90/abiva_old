@@ -1,0 +1,559 @@
+<section>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="sentence" id="content">
+                she worked for two hours
+            </div>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:5%">
+            <div class="col-xs-4 col-xs-offset-2  toggle_box" data-toggle-box="0">
+                <h3 id="column1_text">adverb</h3>
+                <div class="box box-orange" id="column1_box" data-toggle-box-content="0"></div>
+            </div>
+            <div class="col-xs-4 toggle_box" data-toggle-box="1">
+                <h3 id="column2_text">word it modifies</h3>
+                <div class="box box-blue" id="column2_box" data-toggle-box-content="1"></div>
+            </div>
+        </div>
+        <div class="btn_reset">RESET</div>
+    </div>
+    <a href="#" class="btn_done">Done</a>
+    <a href="#" class="btn_progress">Progress Report</a>
+    <div class="change_page_btns">
+        <img src="abiva_assets/left.png" class="btn_left">
+        <img src="abiva_assets/right.png" class="btn_right">
+    </div>
+</section>
+<style>
+[data-toggle-box] {
+    cursor: pointer;
+    padding-bottom: 16px;
+}
+
+[data-toggle-box]:hover {
+    background: #EAEAEA;
+    padding-bottom: 21px;
+    border-radius: 27px;
+}
+
+[data-toggle-box].selected {
+    background: #444;
+    padding-bottom: 21px;
+    border-radius: 27px;
+    color: white;
+}
+
+.box {
+    padding-bottom: 27px;
+    padding-top: 25px;
+    border-radius: 20px;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.box-orange {
+    border: 3px solid #EB8D33;
+}
+
+.box-blue {
+    border: 3px solid #0097D7;
+}
+
+.fragment {
+    padding: 2px 7px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.fragment:hover {
+    background: #eee;
+    transition: all 250ms ease-in-out;
+}
+
+.fragment_box {
+    padding: 5px 15px;
+    font-size: 27px;
+    border-radius: 20px;
+    display: block;
+}
+
+.fragment_box-orange {
+    background: #FAE5BA;
+}
+
+.fragment_box-blue {
+    background: #0097D7;
+    color: white;
+}
+
+.fragment_box > .fa {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Calibri";
+    text-align: center;
+}
+
+.fragment {
+    padding-left: 2.5px;
+    padding-right: 2.5px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.fragment:hover {
+    background: #ccc;
+    transition: all 150ms ease-in-out;
+}
+
+p > .fragment:first-child {
+    padding-left: 15px;
+}
+
+.fragment.selected {
+    /*background: #A0A0A0;*/
+    
+    color: #fff;
+}
+
+.btn_box_blue {
+    margin-left: 20px;
+}
+
+.choosen {
+    -webkit-filter: drop-shadow(5px 5px 30px #E4C17A);
+    filter: drop-shadow(5px 5px 30px #E4C17A);
+}
+
+.question_container {
+    display: none;
+}
+
+.question_container:first-child {
+    display: block;
+}
+
+.correct {
+    background: green;
+    color: white;
+}
+
+.wrong {
+    background: red;
+    color: white;
+}
+
+.na {
+    background: aliceblue;
+    color: white;
+}
+
+.btn_done {
+    display: none;
+    background: #199cdd;
+    background-image: -webkit-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -moz-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -ms-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -o-linear-gradient(top, #199cdd, #1079b2);
+    background-image: linear-gradient(to bottom, #199cdd, #1079b2);
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 4px 0px #00678E;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+    padding: 10px 55px 10px 55px;
+    text-decoration: none;
+    position: absolute;
+    left: 52px;
+    top: 250px;
+}
+
+.answers {
+    background: #ccc;
+    color: white;
+    margin-top: 5px;
+    padding: 9px;
+    border-radius: 40px;
+    width: 50%;
+}
+
+.btn_done,.btn_reset:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.overlay_content {
+    width: 80%;
+    height: 81%;
+    position: absolute;
+    top: 80px;
+    left: 145px;
+    background: -moz-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* FF3.6+ */
+    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #feed77), color-stop(100%, #ee9b0f));
+    /* Chrome,Safari4+ */
+    
+    background: -webkit-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Chrome10+,Safari5.1+ */
+    
+    background: -o-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Opera 11.10+ */
+    
+    background: -ms-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* IE10+ */
+    
+    background: linear-gradient(to bottom, #feed77 0%, #ee9b0f 100%);
+    /* W3C */
+}
+
+.btn_reset{
+       /* background: #199cdd; */
+       display: block; 
+      background: #199cdd;
+      background-image: -webkit-linear-gradient(top, #199cdd, #1079b2);
+      background-image: -moz-linear-gradient(top, #199cdd, #1079b2);
+      background-image: -ms-linear-gradient(top, #199cdd, #1079b2);
+      background-image: -o-linear-gradient(top, #199cdd, #1079b2);
+      background-image: linear-gradient(to bottom, #199cdd, #1079b2);
+      -webkit-border-radius: 11;
+      -moz-border-radius: 11;
+      border-radius: 11px;
+      -webkit-box-shadow: 0px 1px 3px #666666;
+      -moz-box-shadow: 0px 1px 3px #666666;
+      box-shadow: 0px 4px 0px #00678E;
+      font-family: 'Montserrat', sans-serif;
+      color: #ffffff;
+      font-size: 22px;
+      padding: 10px 10px 10px 10px;
+      text-decoration: none;
+      /* position: absolute; */
+      /* left: 52px; */
+      /* top: 250px; */
+      width: 16%;
+      margin-left: 166px;
+      margin-top: 13px;
+      float: left;
+      cursor:pointer;
+}
+
+[data-column-index="0"] {
+    background: #EB8D33 !important;
+}
+
+[data-column-index="1"] {
+    background: #0097D7 !important;
+}
+</style>
+<script>
+initActivityStage();
+
+var ad = currentActivityData;
+var questions = ad.questions;
+var answers = [];
+var title = ad.title;
+var instruction = ad.instruction;
+
+var currentActivityIndex = 0;
+
+var selected_words = init(questions.length);
+var results = init(questions.length);
+
+var user_answers = init(questions.length);
+var toggle_box = -1;
+var done = false;
+var total = 0;
+
+setCurrentCounter(currentActivityIndex + 1);
+setLastCounter(questions.length);
+
+setActivityTitle(title);
+setActivityInstruction(instruction);
+showInstructions(instruction, true);
+
+setActivityBtn("Next Activity", parseInt($("#activity_btn").attr("data-activity")) + 1);
+
+$.each(questions, function(i, v) {
+    $('#content').append("<div class='question_container' align='center' data-content-index='" + i + "'>" + createFragmentsMultiline(v.question_text) + "<span></span></div>");
+    var col1_text = v.question_choices[0];
+    var col2_text = v.question_choices[1];
+    $('#column1_text').text(col1_text);
+    $('#column2_text').text(col2_text);
+    answers.push(v.question_answer);
+});
+
+$('.counter').show();
+$('.timer').show();
+
+$('.btn_done').click(function() {
+    $('.overlay_in').fadeIn();
+    //}
+});
+$('.yes').click(function() {
+    var correct = 0;
+    $('.overlay_in').fadeOut();
+    console.log("btn done called");
+    //if (selected_words.length == 10) {
+    $.each(user_answers, function(i, v) {
+        if (answers[i] == user_answers[i]) {
+            $('[data-content-index="' + i + '"] > span').html("<div class='answers'> <img src='abiva_assets/correct.png'> <div style='font-size:20px'>Answer: " + answers[i] +
+                "</div>" + "</div>");
+            correct++;
+        } else if (user_answers[i].length == 0) {
+            $('[data-content-index="' + i + '"] > span').html("<div class='answers'> <img src='abiva_assets/NA.png'> <div style='font-size:20px'>Answer: " + answers[i] +
+                "</div>" + "</div>");
+        } else {
+            $('[data-content-index="' + i + '"] > span').html("<div class='answers'> <img src='abiva_assets/wrong.png'> <div style='font-size:20px'>Answer: " + answers[i] +
+                "</div>" + "</div>");
+        }
+    });
+    total = (correct / questions.length) * 100;
+    set_score(total);
+    stopTimer();
+    $('.overlay_scoring').fadeIn();
+});
+$('.no').click(function() {
+    $('.overlay_in').fadeOut();
+});
+$('.overlay_scoring').find('.close_btn').click(function() {
+    $(this).parent().parent().fadeOut();
+    showProgress(total, createProgressReport());
+    //set done button to retake button
+    retake();
+});
+$('.btn_right').click(function() {
+    initActPage();
+    console.log("natawag btn_right");
+
+    $('[data-content-index="' + currentActivityIndex + '"]').hide();
+
+    currentActivityIndex++;
+
+    $('[data-content-index="' + (currentActivityIndex) + '"]').show();
+
+    if (currentActivityIndex == (questions.length - 1)) {
+        $(this).hide();
+        $('.btn_left').show();
+        $('.btn_done').show();
+    }
+    setCurrentCounter(currentActivityIndex + 1);
+});
+
+
+$('.btn_left').click(function() {
+    initActPage();
+    console.log("natawag btn_left");
+
+    $('[data-content-index="' + currentActivityIndex + '"]').hide();
+    currentActivityIndex--;
+    $('[data-content-index="' + (currentActivityIndex) + '"]').show();
+    if (currentActivityIndex == 0) {
+        $(this).hide();
+        $('.btn_right').show();
+
+    }
+    $('.btn_done').hide();
+    setCurrentCounter(currentActivityIndex + 1);
+});
+$('.btn_reset').click(function() {
+    $('[data-toggle-box]').removeClass("selected");
+    $.each($('.fragment.selected'), function(i, v) {
+        $(v).removeClass("selected");
+         $(v).removeAttr( "data-column-index" )
+    });
+    //remove all contents on box
+    user_answers[currentActivityIndex][0] = [];
+    user_answers[currentActivityIndex][1] = [];
+    $('#column1_box').text("");
+    $('#column2_box').text("");
+
+});
+$('.fragment').click(function() {
+    if (toggle_box == -1) {
+        alert("Please choose the option you want to mark");
+        return false;
+    }
+
+    var txt = $(this).text().trim();
+
+    if ($(this).hasClass("selected") && parseInt($(this).attr("data-content-index")) == toggle_box) {
+        $(this).removeClass('selected').attr("data-column-index", 3);;
+    } else {
+        $(this).addClass('selected').attr("data-column-index", toggle_box);;
+    }
+
+    refreshAnswers();
+
+    console.log("User Answers recreated", user_answers);
+});
+
+$('.toggle_box').click(function() {
+
+
+    toggle_box = $(this).attr("data-toggle-box");
+
+    //recreate selected fragments
+    recreateSelected();
+
+    $(this).parent().find(".selected").removeClass("selected");
+    $(this).addClass("selected");
+    console.log("Toggle Box Selected");
+
+});
+
+function refreshAnswers() {
+    //recreate text
+    var content_box = $("[data-toggle-box-content='" + 0 + "']");
+    content_box.html("").text("");
+
+    $.each($(".fragment.selected[data-column-index='" + 0 + "']"), function(i, v) {
+        $(content_box).append($(v).text() + " ");
+     
+
+    });
+    user_answers[currentActivityIndex][0] = content_box.text().trim();
+
+    var content_box = $("[data-toggle-box-content='" + 1 + "']");
+    content_box.html("").text("");
+
+    $.each($(".fragment.selected[data-column-index='" + 1 + "']"), function(i, v) {
+        $(content_box).append($(v).text() + " ");
+
+
+    });
+    user_answers[currentActivityIndex][1] = content_box.text().trim();
+
+}
+
+
+function showAnswers() {
+    var user_answers_current = user_answers[currentActivityIndex];
+    $.each(user_answers_current, function(index, value) {
+        //itereate over the answers per column
+        var words = value.split(" ");
+        $.each(words, function(i, v) {
+            $('[data-content-index="' + currentActivityIndex + '"] > p > [data-value="' + v + '"]').addClass("selected").attr("data-content-index", index);
+        });
+    });
+}
+setInterval(function() {
+    $.each($('[data-content-index] > .answers'), function(i, v) {
+        $(v).remove();
+    });
+}, 150);
+
+function recreateSelected() {
+    console.log("recreated function()", $("[data-toggle-box-content='" + toggle_box + "']").text() != "");
+
+    $('#column1_box').text(user_answers[currentActivityIndex][0]);
+    $('#column2_box').text(user_answers[currentActivityIndex][1]);
+
+    if ($("[data-toggle-box-content='" + toggle_box + "']").text() != "") {
+        $.each($("[data-toggle-box-content='" + toggle_box + "']").text().split(" "), function(i, v) {
+            $('[data-content-index="' + currentActivityIndex + '"] > p > [data-value="' + v + '"][data-column-index="' + toggle_box + '"]').addClass("selected");
+        });
+    }
+}
+
+function initActPage() {
+    //remove all selected
+    $('[data-toggle-box]').removeClass("selected");
+    $.each($('.fragment.selected'), function(i, v) {
+        $(v).removeClass("selected");
+    });
+    //remove all contents on box
+    $('#column1_box').text("");
+    $('#column2_box').text("");
+
+    if (done) {
+        showAnswers();
+    }
+}
+setInterval(function() {
+    $("[data-toggle-box-content='" + 0 + "']").text(user_answers[currentActivityIndex][0]);
+    $("[data-toggle-box-content='" + 1 + "']").text(user_answers[currentActivityIndex][1]);
+}, 100);
+
+function removeFromGroup(grpName, arr) {
+    var what, a = arguments,
+        L = a.length,
+        ax;
+    while (L > 1 && arr.length) {
+        what = a[--L];
+        while ((ax = arr.indexOf(what)) !== -1) {
+            arr.splice(ax, 1);
+        }
+    }
+    return arr;
+}
+
+function addFromGroup(grpName, value) {
+
+}
+
+function createFragmentsMultiline(content) {
+    var html = "";
+    var d = content;
+    //get paragraphs
+    var d_paragraphs = d.split("#");
+    //get words per paragraph;
+    $.each(d_paragraphs, function(x, y) {
+        html += "<p>";
+        var words = y.split(" ");
+        $.each(words, function(i, v) {
+            html += "<span class='fragment' data-value='" + v.toLowerCase().replace(".", "") + "'>" + v.replace(".", "") + "</span>";
+        });
+        html += ".</p>";
+    });
+    return html;
+}
+
+function createProgressReport() {
+    var content = "<table class='table progress_table'>";
+    content += "<thead>";
+    content += "<tr> <th>Result</th> <th>Question</th> <th>Your Answer</th> </tr>";
+    content += "</thead>";
+    $.each(user_answers, function(i, v) {
+        content += "<tr>";
+
+        content += "<td>";
+        if (checkArray(user_answers[i], answers[i])) {
+            content += "<img src='abiva_assets/correct.png'>";
+        } else if (user_answers[i].length == 0) {
+            content += "<img src='abiva_assets/NA.png'>";
+        } else {
+            content += "<img src='abiva_assets/wrong.png'>";
+        }
+        content += "</td>";
+
+        content += "<td>";
+        content += questions[i].question_text;
+        content += "</td>";
+
+        content += "<td>";
+        if (user_answers[i].length == 0) {
+            content += "<span class='btn_box_orange'>N/A</span>";
+        } else {
+            content += "<span class='btn_box_orange'>" + user_answers[i] + "</span>";
+        }
+        content += "</td>";
+
+        content += "</tr>";
+    });
+    return content;
+}
+</script>

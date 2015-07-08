@@ -1,0 +1,278 @@
+<section>
+    <div class="row" style="margin-top:64px">
+        <div class="col-xs-12">
+            <div id="content" class="sentence"></div>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:5%" id="answers">
+            <!-- <a href="#" class="btn_box_blue btn_box_orange">first</a>
+<a href="#" class="btn_box_blue" style="margin-left:20px">firstly</a>
+ -->
+        </div>
+    </div>
+    <a href="#" class="btn_done" style=" top: 211px;">Done</a>
+    <a href="#" class="btn_progress" style="top:541px">Progress Report</a>
+    <div class="change_page_btns">
+        <img src="abiva_assets/left.png" class="btn_left">
+        <img src="abiva_assets/right.png" class="btn_right">
+    </div>
+</section>
+<style>
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 200px;
+}
+
+.question_container {
+    display: none;
+}
+
+.question_container:first-child {
+    display: block;
+}
+
+[data-content-answer-group] {
+    display: none;
+}
+
+[data-content-answer-group]:first-child {
+    display: block;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Calibri";
+    margin: 0 auto;
+}
+
+.selection {
+    background: #95C2D6;
+    border-radius: 20px;
+    margin-top: 5%;
+    padding: 15px 0px 17px 0px;
+}
+
+.btn_done {
+    display: none;
+    background: #199cdd;
+    background-image: -webkit-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -moz-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -ms-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -o-linear-gradient(top, #199cdd, #1079b2);
+    background-image: linear-gradient(to bottom, #199cdd, #1079b2);
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 4px 0px #00678E;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+    padding: 10px 55px 10px 55px;
+    text-decoration: none;
+    position: absolute;
+    left: 52px;
+    top: 250px;
+}
+
+.btn_done:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.overlay_content {
+    width: 80%;
+    height: 81%;
+    position: absolute;
+    top: 80px;
+    left: 145px;
+    background: -moz-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* FF3.6+ */
+    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #feed77), color-stop(100%, #ee9b0f));
+    /* Chrome,Safari4+ */
+    
+    background: -webkit-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Chrome10+,Safari5.1+ */
+    
+    background: -o-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Opera 11.10+ */
+    
+    background: -ms-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* IE10+ */
+    
+    background: linear-gradient(to bottom, #feed77 0%, #ee9b0f 100%);
+    /* W3C */
+}
+.btn_box_blue {
+  display: inline-table;
+  margin-top: 25px;
+}
+[data-content-answer-group] {
+  margin-top: -50px;
+}
+</style>
+<script>
+var ad = currentActivityData;
+var questions = ad.questions;
+var answers = [];
+var title = ad.title;
+var instruction = ad.instruction;
+
+var currentActivityIndex = 0;
+
+var user_answers = init(questions.length);
+
+var total = 0;
+setCurrentCounter(currentActivityIndex + 1);
+setLastCounter(questions.length);
+
+setActivityTitle(title);
+setActivityInstruction(instruction);
+
+showInstructions(instruction, true);
+
+setActivityBtn("Next Activity", parseInt($("#activity_btn").attr("data-activity")) + 1);
+
+$.each(questions, function(i, v) {
+    $('#content').append("<div class='question_container' align='center' data-content-index='" + i + "'>" + v.question_text + "</div>");
+    var ans = "";
+    $.each(v.question_choices, function(x, y) {
+        ans += ('<a href="#" class="btn_box_blue" style="margin-left:20px">' + y + '</a>');
+    });
+    $('#answers').append("<div data-content-answer-group='" + i + "'>" + ans + "</div>");
+
+    answers.push(v.question_answer);
+});
+
+$('.btn_box_blue').click(function() {
+    $(this).parent().find(".btn_box_orange").removeClass("btn_box_orange");
+    $(this).addClass("btn_box_orange");
+    //get datagroup of button
+    var id = parseInt($(this).parent().attr("data-content-answer-group"));
+    user_answers[id] = $(this).text().trim();
+    console.log("userAnsers", user_answers);
+    $('[data-content-index="' + currentActivityIndex + '"] > .answer_field').text($(this).text());
+});
+
+$('.btn_right').click(function() {
+    console.log("natawag btn_right");
+
+    $('[data-content-index="' + currentActivityIndex + '"]').hide();
+    $('[data-content-answer-group="' + currentActivityIndex + '"]').hide();
+
+    currentActivityIndex++;
+
+    $('[data-content-index="' + (currentActivityIndex) + '"]').show();
+    $('[data-content-answer-group="' + (currentActivityIndex) + '"]').show();
+
+    if (currentActivityIndex == (questions.length - 1)) {
+        $(this).hide();
+        $('.btn_left').show();
+        $('.btn_done').show();
+    }
+    setCurrentCounter(currentActivityIndex + 1);
+});
+
+$('.btn_left').click(function() {
+    console.log("natawag btn_left");
+
+    $('[data-content-index="' + currentActivityIndex + '"]').hide();
+    $('[data-content-answer-group="' + currentActivityIndex + '"]').hide();
+    currentActivityIndex--;
+    $('[data-content-index="' + (currentActivityIndex) + '"]').show();
+    $('[data-content-answer-group="' + (currentActivityIndex) + '"]').show();
+    if (currentActivityIndex == 0) {
+        $(this).hide();
+        $('.btn_right').show();
+
+    }
+    $('.btn_done').hide();
+    setCurrentCounter(currentActivityIndex + 1);
+});
+
+$('.btn_done').click(function() {
+    $('.overlay_in').fadeIn();
+    //}
+});
+$('.yes').click(function() {
+    $('.overlay_in').fadeOut();
+    console.log("btn done called");
+    //if (selected_words.length == 10) {
+    var correct = 0;
+    $.each(user_answers, function(i, v) {
+        $('[data-content-index="' + i + '"] > .answers').html('');
+        if (answers[i] == user_answers[i]) {
+            $('[data-content-index="' + i + '"]').append("<div class='answers'> <img src='abiva_assets/correct.png'> <div style='font-size:15px'>Answer: " + answers[i] +
+                "</div>" + "</div>");
+            correct++;
+        }  else if (user_answers[i].length == 0) {
+            $('[data-content-index="' + i + '"]').append("<div class='answers'> <img src='abiva_assets/NA.png'> <div style='font-size:15px'>Answer: " + answers[i] +
+                "</div>" + "</div>");
+        } else {
+            $('[data-content-index="' + i + '"]').append("<div class='answers'> <img src='abiva_assets/wrong.png'> <div style='font-size:15px'>Answer: " + answers[i] +
+                "</div>" + "</div>");
+
+        }
+    });
+    total = (correct / questions.length) * 100;
+    set_score(total);
+    stopTimer();
+    $('.overlay_scoring').fadeIn();
+});
+$('.no').click(function() {
+    $('.overlay_in').fadeOut();
+});
+$('.close_btn').click(function() {
+    $(this).parent().fadeOut();
+});
+$('.overlay_scoring').find('.close_btn').click(function() {
+    $(this).parent().parent().fadeOut();
+    showProgress(total, createProgressReport());
+    //set done button to retake button
+    retake();
+    
+});
+
+function createProgressReport() {
+    var content = "<table class='table progress_table'>";
+    content += "<thead>";
+    content += "<tr> <th>Result</th> <th>Question</th> <th>Your Answer</th> </tr>";
+    content += "</thead>";
+    $.each(user_answers, function(i, v) {
+        content += "<tr>";
+
+        content += "<td>";
+        if (answers[i] == user_answers[i]) {
+            content += "<img src='abiva_assets/correct.png'>";
+        } else if (user_answers[i].length == 0) {
+            content += "<img src='abiva_assets/NA.png'>";
+        } else {
+            content += "<img src='abiva_assets/wrong.png'>";
+        }
+        content += "</td>";
+
+        content += "<td>";
+        content += questions[i].question_text;
+        content += "</td>";
+
+        content += "<td>";
+        if (user_answers[i].length == 0) {
+            content += "<span class='btn_box_orange'>N/A</span>";
+        } else {
+            content += "<span class='btn_box_orange'>" + user_answers[i] + "</span>";
+        }
+        content += "</td>";
+
+        content += "</tr>";
+    });
+    return content;
+}
+</script>

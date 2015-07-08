@@ -1,0 +1,422 @@
+<!-- Starts contents -->
+<section>
+    <div class="row" style="height:350px;width:95%">
+        <div class="col-xs-6 col-sm-3 ">
+            <div class="question"></div>
+        </div>
+        <div class="col-xs-6 col-sm-4 ">
+            <div class="" id="answerSlot">
+            </div>
+        </div>
+        <div class="col-xs-6 col-sm-1 ">
+            <div class="solution"></div>
+        </div>
+        <div class="col-xs-6 col-sm-4 ">
+            <div class="list-group" id="answerPile"></div>
+        </div>
+    </div>
+    <a href="#" class="btn_done"> Done </a>
+    <a href="#" class="btn_progress"> Progress Report </a>
+</section>
+<style>
+.btn_done {
+    background: #199cdd;
+    background-image: -webkit-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -moz-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -ms-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -o-linear-gradient(top, #199cdd, #1079b2);
+    background-image: linear-gradient(to bottom, #199cdd, #1079b2);
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 4px 0px #00678E;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+    padding: 10px 55px 10px 55px;
+    text-decoration: none;
+    position: absolute;
+    left: 52px;
+    top: 250px;
+}
+
+.btn_done:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.overlay_content {
+    width: 80%;
+    height: 81%;
+    position: absolute;
+    top: 80px;
+    left: 145px;
+    background: -moz-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* FF3.6+ */
+    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #feed77), color-stop(100%, #ee9b0f));
+    /* Chrome,Safari4+ */
+    
+    background: -webkit-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Chrome10+,Safari5.1+ */
+    
+    background: -o-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Opera 11.10+ */
+    
+    background: -ms-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* IE10+ */
+    
+    background: linear-gradient(to bottom, #feed77 0%, #ee9b0f 100%);
+    /* W3C */
+}
+
+.list-group-item {
+    margin-bottom: 6px;
+    padding: 10px 20px 10px 20px !important;
+    border: 0px !important;
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+.list-group-item_solution {
+    margin-top: 10px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    margin-bottom: 21px;
+    margin-right: 163px;
+}
+
+.row {
+    margin-top: 8% !important;
+    margin-left: 25px !important;
+}
+
+.drop_point {
+    border: 2px dashed #433812;
+    padding: 10px 20px 10px 20px;
+    height: 50px;
+    margin-bottom: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 23px;
+    display: block;
+    margin-top: 10px;
+}
+
+.question {
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 26px;
+    height: 60px;
+    font-weight: bold;
+}
+
+.place {
+    -webkit-border-radius: 7;
+    -moz-border-radius: 7;
+    border-radius: 7px;
+    border: 2px dashed #3cb0fd;
+    width: ;
+}
+
+.list-group-item-2 {
+    margin-top: -1px !important;
+    /*overflow: hidden !important;
+  white-space: nowrap !important;*/
+    
+    margin-bottom: 12px;
+    margin-left: -48px;
+    font-size: 24px !important;
+}
+
+.answer {
+    -webkit-border-radius: 7;
+    -moz-border-radius: 7;
+    border-radius: 7px;
+    -webkit-box-shadow: 0px 4px 0px #00678E;
+    -moz-box-shadow: 0px 4px 0px #00678E;
+    box-shadow: 0px 4px 0px #00678E;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 22px;
+    background: #0097D7;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    margin-bottom: 14px;
+    margin-top: 8px;
+    display: block;
+    /*
+  overflow: hidden;
+  white-space: nowrap;*/
+    /*height:51px;
+  width:256px;*/
+}
+
+.reflow {
+    white-space: nowrap;
+}
+
+.ui-state-disabled,
+.ui-widget-content .ui-state-disabled,
+.ui-widget-header .ui-state-disabled {
+    opacity: 1;
+}
+
+.answer:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.counter {
+    display: none !important;
+}
+
+.btn_done {
+    top: 196px !important;
+}
+</style>
+<script>
+initActivityStage();
+
+
+var ad = currentActivityData;
+var questions = ad.questions;
+var answers = [];
+var title = ad.title;
+var instruction = ad.instruction;
+
+var currentActivityIndex = 0;
+
+var user_answers = init(questions.length);
+
+var total = 0;
+
+var question_list = questions;
+
+var correctCards = 0;
+var answer_word = [];
+var correct_answer_word = init(questions.length);
+var score = 0;
+
+setCurrentCounter(currentActivityIndex + 1);
+setLastCounter(questions.length);
+
+setActivityTitle(title);
+setActivityInstruction(instruction);
+showInstructions(instruction);
+
+setActivityBtn("Next Activity", parseInt($("#activity_btn").attr("data-activity")) + 1);
+
+initDragNDrop();
+
+
+function handleCardDrop(event, ui) {
+    ui.draggable.addClass('reflow');
+    var slotNumber = $(this).data('number');
+    var cardNumber = ui.draggable.data('number');
+
+    // If the card was dropped to the correct slot,
+    // change the card colour, position it directly
+    // on top of the slot, and prevent it being dragged
+    // again
+
+    //if (slotNumber == cardNumber) {
+    ui.draggable.addClass('correct');
+    ui.draggable.draggable('disable');
+    $(this).droppable('disable');
+    ui.draggable.position({
+        of: $(this),
+        my: 'left top',
+        at: 'left top'
+    });
+    ui.draggable.draggable('option', 'revert', false);
+    correctCards++;
+
+    // }
+    answer_word.push(cardNumber);
+    console.log("answer_word", answer_word);
+    console.log("correct_answer_word", correct_answer_word);
+    if (answer_word.length == question_list.length) {
+        $('.btn_done').fadeIn();
+        checking();
+    }
+}
+var correct = 0;
+
+function checking() {
+
+    $.each(answer_word, function(i, answer) {
+        if (answer == correct_answer_word[i]) {
+            $('.solution').append("<img class='list-group-item_solution' src='abiva_assets/correct.png'>");
+            correct++;
+        } else {
+            $('.solution').append("<img class='list-group-item_solution' src='abiva_assets/wrong.png'>");
+        }
+    });
+
+}
+
+$('.btn_done').click(function() {
+    $('.overlay_in').fadeIn();
+});
+$('.close_btn').click(function() {
+    $(".overlay_scoring").fadeOut();
+});
+$('.yes').click(function() {
+    $('.overlay_in').fadeOut();
+    console.log("Btn Done called");
+    set_score((correct / question_list.length) * 100);
+    stopTimer();
+    $('.solution').show();
+});
+$('.no').click(function() {
+    $('.overlay_in').fadeOut();
+});
+$('.overlay_scoring').find('.close_btn').click(function() {
+    $(this).parent().parent().fadeOut();
+    showProgress((correct / question_list.length) * 100, createProgressReport());
+    //set done button to retake button
+    retakeDnD();
+});
+
+function retakeDnD() {
+    console.log("Retake");
+
+    $('.btn_done').text("Retake").attr("data-retake", 1).show().unbind("click").click(function() {
+        stopTimer();
+        timer_interval = createTimer();
+
+        initDragNDrop();
+
+        $(this).text("Done").hide();
+
+        $(this).unbind("click").click(function() {
+            $('.overlay_in').fadeIn();
+        });
+
+        $('.btn_progress').fadeOut();
+
+        showInstructions(instruction, true);
+    });
+    $('.btn_progress').fadeIn().click(function() {
+        $('.overlay_progress').fadeIn();
+    });
+}
+
+function check_solution() {
+    // $('.btn_done').fadeOut();
+    // $('.answer').unbind("click");
+    // $('.solution').show();
+    // $(".solution").html("");
+    // // $('.solution_answer').text("Answer: " +correct_answer_word[0]+","+correct_answer_word[1]+","+correct_answer_word[2]+","+ correct_answer_word[3]+","+);
+    // clearInterval(my_timer);
+    // for (i = 0; i < question_list; i++) {
+    //     console.log(answer_word[i], dataJSON[0].questions[i].question_answer);
+    //     if (answer_word[i] == dataJSON[0].questions[i].question_answer) {
+    //         console.log("correct");
+    //         $(".solution").append("<img class='list-group-item_solution '  src='abiva_assets/correct.png'>");
+    //     } else {
+    //         $(".solution").append("<img class='list-group-item_solution '  src='abiva_assets/wrong.png'>");
+    //     }
+    // }
+}
+
+function initDragNDrop() {
+    correctCards = 0;
+    answer_word = [];
+    correct_answer_word = init(questions.length);
+    score = 0;
+    correct = 0;
+    $('.btn_done').hide();
+    $('.btn_left').hide();
+    $('.btn_right').hide();
+    $('.counter').hide();
+
+    $('.question').html('');
+    $('#answerPile').html('');
+    $('#answerSlot').html('');
+
+    var random_choices = [];
+
+    $.each(questions, function(i, question) {
+        var question_name = question.question_text;
+        var question_answer = question.question_answer;
+        var question_choices = question.question_choices
+        $('.question').append("<a href='#' class='list-group-item list-group-item-2 ' data-index=" + i + " >" + question_name + "</a>");
+        correct_answer_word[i] = question_answer;
+    });
+
+    $.each(questions, function(i, question) {
+        random_choices.push(question.question_choice);
+        shuffle(random_choices);
+    });
+    $.each(questions, function(i, question) {
+        var question_choices = random_choices[i];
+        // $(".solution").append("<img class='list-group-item_solution '  src='abiva_assets/correct.png'>");
+        $('.solution').hide();
+        $('<a href="#" class="answer">' + question_choices + '</a> ').data('number', question_choices).attr('id', 'card' + question_choices).appendTo('#answerPile').draggable({
+            containment: '.row',
+            stack: '#answerPile a',
+            cursor: 'move',
+            revert: true
+        })
+    });
+    //create draggable answers
+
+    //create reset function
+    $('.answer').click(function() {
+        $(initDragNDrop);
+    });
+
+    $.each(questions, function(i, question) {
+        //append drag area
+        var question_answer = question.question_answer;
+
+        $('<div class="place drop_point">' + /*question_answer*/ +'</div>').data('number', question_answer).appendTo('#answerSlot').droppable({
+            accept: '#answerPile a',
+            hoverClass: 'hovered',
+            drop: handleCardDrop
+        });
+    });
+    $('.solution').html("");
+}
+
+function createProgressReport() {
+    var content = "<table class='table progress_table'>";
+    content += "<thead>";
+    content += "<tr> <th>Result</th> <th>Question</th> <th>Your Answer</th> </tr>";
+    content += "</thead>";
+    $.each(answer_word, function(i, v) {
+        content += "<tr>";
+
+        content += "<td style='font-size:28px'>";
+        if (correct_answer_word[i] == answer_word[i]) {
+            content += "<img src='abiva_assets/correct.png'>";
+        } else {
+            content += "<img src='abiva_assets/wrong.png'>";
+        }
+        content += "</td>";
+
+        content += "<td style='font-size:18px'>";
+        content += questions[i].question_text;
+        content += "</td>";
+
+        content += "<td>";
+        content += "<span class='btn_box_orange' style='font-size:18px'>" + answer_word[i] + "</span>";
+
+        content += "</td>";
+
+        content += "</tr>";
+    });
+    return content;
+}
+</script>

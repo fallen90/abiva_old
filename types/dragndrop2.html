@@ -1,0 +1,166 @@
+<!-- Starts contents -->
+<section>
+    <div class="row" style="overflow:auto;height:350px;width:95%">
+        <div class="col-xs-12">
+            <div class="list-group" id="answerPile" align="left" style="padding-left:50px"></div>
+        </div>
+        <div class="col-xs-12">
+            <div class="" id="answerSlot"></div>
+        </div>
+    </div>
+</section>
+<style>
+.list-group-item {
+    margin-bottom: 6px;
+    padding: 10px 20px 10px 20px !important;
+    border: 0px !important;
+}
+
+.row {
+    margin-top: 4% !important;
+}
+
+.drop_point {
+    border: 2px dashed #433812;
+    padding: 5px 10px;
+    height: 50px;
+    margin-bottom: 5px;
+}
+
+.question {
+    font-family: "Calibri";
+    font-size: 25px;
+    padding: 5px 10px;
+    display: inline-block;
+    margin-left: 10px;
+}
+
+#answerSlot {}
+
+.place {
+    -webkit-border-radius: 7;
+    -moz-border-radius: 7;
+    border-radius: 7px;
+    border: 2px solid #3cb0fd;
+    margin-left: 25px;
+    display: inline-block;
+    padding: 10px 23px 10px 23px;
+}
+
+.question-block {
+    display: block;
+}
+
+.answer {
+    -webkit-border-radius: 7;
+    -moz-border-radius: 7;
+    border-radius: 7px;
+    -webkit-box-shadow: 0px 4px 0px #00678E;
+    -moz-box-shadow: 0px 4px 0px #00678E;
+    box-shadow: 0px 4px 0px #00678E;
+    font-family: Arial;
+    color: #ffffff;
+    font-size: 18px;
+    background: #0097D7;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.answer:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+</style>
+<script>
+$(document).ready(function() {
+    $(init);
+
+    function init() {
+
+        // Hide the success message
+        $('#successMessage').hide();
+        $('#successMessage').css({
+            left: '580px',
+            top: '250px',
+            width: 0,
+            height: 0
+        });
+
+        // Reset the game
+        correctCards = 0;
+        $('#answerPile').html('');
+        $('#answerSlot').html('');
+
+        // Create the pile of shuffled cards
+        var numbers = [1, 2, 3, 4, 5, 6];
+        var words = ['on Earth', 'we should not', 'store up treasures', 'four', 'five', 'six'];
+        for (var i = 0; i < 3; i++) {
+            $('<div class="question-block"><a href="#" class="answer">' + numbers[i] + '</a>' + "<div class='question'>" + words[i] + "</div></div>").data('number', numbers[i]).attr('id', 'card' + numbers[i]).appendTo('#answerPile')
+            $('.answer').draggable({
+                containment: '.row',
+                stack: '#answerPile a',
+                cursor: 'move',
+                revert: true
+            }).click(function() {
+                $(init);
+            });
+        }
+
+        // Create the card slots
+        for (var i = 1; i <= 3; i++) {
+            $('<div class="place drop_point"></div>').data('number', i).appendTo('#answerSlot').droppable({
+                accept: '#answerPile a',
+                hoverClass: 'hovered',
+                drop: handleCardDrop
+            });
+        }
+
+    }
+
+    function handleCardDrop(event, ui) {
+        console.log(ui);
+        var slotNumber = $(this).data('number');
+        var cardNumber = ui.draggable.data('number');
+
+        // If the card was dropped to the correct slot,
+        // change the card colour, position it directly
+        // on top of the slot, and prevent it being dragged
+        // again
+
+        //  if (slotNumber == cardNumber) {
+        ui.draggable.addClass('correct');
+        ui.draggable.draggable('disable');
+        $(this).droppable('disable');
+        ui.draggable.position({
+            of: $(this),
+            my: 'left top',
+            at: 'left top'
+        });
+        ui.draggable.draggable('option', 'revert', false);
+        correctCards++;
+        //  }
+
+        // If all the cards have been placed correctly then display a message
+        // and reset the cards for another go
+
+        if (correctCards == 10) {
+            $('#successMessage').show();
+            $('#successMessage').animate({
+                left: '380px',
+                top: '200px',
+                width: '400px',
+                height: '100px',
+                opacity: 1
+            });
+        }
+
+    }
+});
+</script>

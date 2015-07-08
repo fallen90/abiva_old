@@ -1,0 +1,140 @@
+
+<section>
+    <div class="row">
+        <div class="col-xs-12" id = "text_container" >
+
+            <h3 class="sentence" id="title">
+                she worked for two hours
+            </h3>
+            <p class="description" id="description" style="font-family: 'Montserrat', sans-serif;">
+
+            </p>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:-15%">
+            <a href="#" class="btn_box_yellow" data-index = "0">Phrases</a>
+            <a href="#" class="btn_box_yellow" data-index = "1">Sentence</a>
+        </div>
+    </div>
+</section>
+<style>
+
+.btn_box_yellow{
+    -webkit-border-radius: 25;
+      -moz-border-radius: 25;
+      border-radius: 25px;
+      font-family: 'Montserrat', sans-serif;
+      color: #ffffff;
+      font-size: 23px;
+      background: #FDC00F;
+      padding: 15px 40px 15px 40px;
+      border: solid #7F610A 4px;
+      text-decoration: none !important;
+      display: block;
+      margin-top: -22.5% !important;
+      margin-bottom: 26.5% !important;
+      margin-left: -96.5%!important;
+      width: 21%;
+}
+
+.btn_orange {
+   -webkit-border-radius: 25;
+      -moz-border-radius: 25;
+      border-radius: 25px;
+      font-family: 'Montserrat', sans-serif;
+      color: #ffffff;
+      font-size: 23px;
+      background: #A37900;
+      padding: 15px 40px 15px 40px;
+      border: solid #7F610A 4px;
+      text-decoration: none !important;
+      display: block;
+      margin-top: -22.5% !important;
+      margin-bottom: 26.5% !important;
+      margin-left: -96.5%!important;
+      width: 21%;
+
+}
+.btn_box_yellow:hover {
+  font-color: #ffffff !important;
+}
+
+.btn_orange:hover{
+  font-color: #ffffff !important;
+}
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 250px;
+}
+.sentence{
+     font-size: 30px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+   margin-left: 20px;
+
+
+}
+
+.description{
+    font-size: 24px;
+  text-align: left;
+}
+#text_container {
+   
+    border: 2px solid #EB8D33;
+    padding-bottom: 25px;
+    padding-top: 20px;
+    border-radius: 20px;
+    width: 71% !important;
+    height: 453px !important;
+    margin-left: 210px !important
+}
+    
+.choosen {
+     color: #ffffff !important;
+    background: #02202F !important;
+}
+
+</style>
+<script>
+(function() {
+    status = 0;
+    update_button();
+    $('.btn_left').hide();
+    $('.counter').hide();
+    $('.btn_right').hide();
+    $('.timer').hide();
+
+    $.get("data/create.php").success(function(data){
+        var dataJSON = jQuery.parseJSON(data);
+        //initialize json data
+       $.each(dataJSON[0],function(i,v){
+             if(!$.isArray(v)){
+                  $('#' + i).html($(v));
+            }
+        });
+        //load json via click
+        $('[data-index]').click(function(){
+           var current_index = $(this).attr('data-index')
+           console.log(current_index);
+          /*   $.each(dataJSON[$(this).data("index")],function(i,v){
+
+                if(!$.isArray(v)){
+                    $('#' + i).html($(v));
+                }
+             });*/
+              $(this).parent().find('.btn_orange').removeClass("btn_orange");
+              $(this).addClass('btn_orange');
+
+             $( ".description" ).fadeToggle(function(){
+               $('.description').html(dataJSON[current_index].description)
+             }).fadeToggle();
+
+
+    });
+    
+  });
+
+})();
+</script>

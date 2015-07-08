@@ -1,0 +1,321 @@
+<section>
+<div class = "top_tabs"> </div>
+    <div class="row">
+        <div class="col-xs-12" id="text_container">
+            <div class="description" id="content" style="font-family: 'Montserrat', sans-serif;"></div>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:-17%" id="tabs"></div>
+    </div>
+    <div class="change_page_btns">
+        <img src="abiva_assets/left.png" class="btn_left">
+        <img src="abiva_assets/right.png" class="btn_right">
+    </div>
+</section>
+<style>
+.btn_box_yellow {
+    -webkit-border-radius: 25;
+    -moz-border-radius: 25;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    background: #FDC00F;
+    padding: 2px 0px 2px 0px;
+    border: solid #7F610A 4px;
+    text-decoration: none !important;
+    display: block;
+    margin-top: -22.5% !important;
+    margin-bottom: 26.5% !important;
+    margin-left: -96.5%!important;
+    width: 21%;
+}
+
+.btn_box_yellow_top {
+    -webkit-border-radius: 25;
+      -moz-border-radius: 25;
+      border-radius: 25px;
+      font-family: 'Montserrat', sans-serif;
+      color: #ffffff;
+      font-size: 20px;
+      background: #FDC00F;
+      padding: 2px 0px 2px 0px;
+      border: solid #7F610A 4px;
+      text-decoration: none !important;
+      display: block;
+      margin-right: 3% !important;
+      width: 18%;
+      float: right;
+}
+
+.btn_orange {
+    -webkit-border-radius: 25;
+    -moz-border-radius: 25;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    background: #A37900;
+    /*padding: 15px 40px 15px 40px;*/
+    border: solid #7F610A 4px;
+    text-decoration: none !important;
+    display: block;
+    margin-top: -22.5% !important;
+    margin-bottom: 26.5% !important;
+    margin-left: -96.5%!important;
+    width: 21%;
+}
+.btn_orange_top {
+    -webkit-border-radius: 25;
+    -moz-border-radius: 25;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    background: #A37900;
+    border: solid #7F610A 4px;
+    text-decoration: none !important;
+
+
+      background: #FDC00F;/*
+      padding: 14px 0px 14px 0px;*/
+      border: solid #7F610A 4px;
+      text-decoration: none !important;
+      display: block;
+      margin-right: 3% !important;
+      width: 18%;
+      float: right;
+  
+}
+table{
+     border-collapse: inherit;
+  border-spacing: 0;
+  text-align: center;
+  font-size: 18px;
+  margin: 0px;
+  width:100%;
+}
+th {
+  text-align: left;
+  text-align: center;
+}
+
+.btn_box_yellow:hover {
+    font-color: #ffffff !important;
+}
+.btn_box_yellow_top:hover {
+    font-color: #ffffff !important;
+}
+.btn_orange:hover {
+    font-color: #ffffff !important;
+}
+
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 250px;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    margin-left: 20px;
+}
+
+#content {
+      font-size: 24px;
+  text-align: left;
+  text-overflow: ellipsis !important;
+  overflow: hidden !important;
+  height: 440px;
+  /*white-space: nowrap !important;*/
+    /*margin-top: 13%;*/
+}
+
+#text_container {
+    /*
+*/
+    
+    padding-bottom: 25px;
+    padding-top: 20px;
+    border-radius: 20px;
+    width: 71% !important;
+    height: 453px !important;
+    margin-left: 210px !important;
+    padding-right: 3px !important;
+}
+
+.choosen {
+    color: #ffffff !important;
+    background: #02202F !important;
+}
+.top_tabs{
+      display: block;
+}
+
+[data-content-index] {
+    visiblity: none;
+}
+
+[data-index] {
+    position: relative;
+    font-size: 20px !important;
+    padding: 14px 0px 14px 0px !important;
+}
+
+[data-index] > img {
+    position: absolute;
+    top: 15%;
+    left: -17px;
+    display: none;
+}
+</style>
+<script>
+var tab_content = [];
+var page_length = 0;
+var current_page = 0;
+(function() {
+
+    //hide components
+    $('.btn_left').hide();
+    $('.btn_right').hide();
+
+    $('.counter').hide();
+    $('.timer').hide();
+
+    $('.description > [data-content-index]').hide();
+    //load json via click
+    $('#tabs > [data-index]').click(function() {
+    });
+   
+   console.log(currentActivityData);
+
+})();
+
+  function init_datas(data){
+          tab_content = [];
+          tab_content = data;
+          if(tab_content.length >= 5){
+             $(".top_tabs").css("display", "flex");
+             $(".top_tabs").css("margin-left", "150px");
+             $(".top_tabs").css("margin-top", "-20px");
+             $("#content").css("margin-top", "5%");
+              $(".counter").css("bottom", "4%");
+          }
+   }
+   function change_inner_content(content){
+     //  reconstructContentTabs(content,480)
+   
+       var cont = "<div class='parag_content'> " + reconstructContent(content) + "</div>"
+       $('#content').html(cont);
+       
+       //page_length = $('.parag_content > div').length;
+      
+       if(page_length >= 1){
+          $('.counter').show();
+          $('.btn_left').show();
+          $('.btn_right').show();
+          current_page = 1;
+          setCurrentCounter(current_page);
+          setLastCounter(page_length);
+       }
+        $('[data-parag_index]').each(function(i, el){
+       setLastCounter(i+1);
+       });
+        console.log(get_lines($(".parag_content").height(),$(".parag_content").css('line-height')));
+       set_counter(current_page-1);
+   }
+   function reconstructContent(content){
+
+     var words = content.split(" ");
+           var index = 0;
+            for(i=0;i<words.length;i++){
+                if(words[i] == "space_in"){
+                    words[i] = '<div class="para" data-parag_index="'+index+'">';
+                    index++;
+
+                }
+                 if(words[i] == "space_out"){
+                  words[i] = "</div>"
+                 }
+            }
+            page_length = index;
+            return words.join(' ');
+   }
+  function change_tab_content(i){
+    var cont = "<div class='parag_content'>" + reconstructContent(tab_content[i]) + "</div>"
+    $('#content').html(cont);
+    //page_length = $('.parag_content > div').length;
+   console.log(get_lines($(".parag_content").height(),$(".parag_content").css('line-height')));
+    if(page_length >= 1){
+       $('.counter').show();
+       $('.btn_left').show();
+       $('.btn_right').show();
+       current_page = 1;
+       setCurrentCounter(current_page);
+       setLastCounter(page_length);
+    }
+
+    set_counter(current_page-1);
+  }
+  function set_counter(current_index){
+    for( i =0;i<page_length;i++){
+       $('[data-parag_index="'+i+'"]').css("display","none");
+    }
+    $('[data-parag_index="'+current_index+'"]').css("display","block");
+      console.log(get_lines($('[data-parag_index="'+current_index+'"]').height(),$('[data-parag_index="'+current_index+'"]').css('line-height')));
+
+  }
+
+  $('.btn_left').click(function() {
+      if(current_page > 1){
+        current_page --;
+        setCurrentCounter(current_page);
+        set_counter(current_page-1);
+      }
+  });
+
+  $('.btn_right').click(function() {
+      if(current_page < page_length){
+        current_page ++;
+        setCurrentCounter(current_page);
+        set_counter(current_page-1);
+      }
+  });
+  function reconstructContentTabs(paragraph,wordLength){
+       var divider = wordLength;
+       // var paragraph = paragraphs.replace(/(<([^>]+)>)/ig,"")
+       var divide_count = Math.ceil(paragraph.length / divider);
+       var paragraph_arr = [];
+       var new_paragraph = "";
+       var last_character = "";
+       
+         for (i = 0; i < divide_count; i++) { 
+                  last_character = paragraph.substring((divider * (i+1))-divider, divider * (i+1))[paragraph.substring((divider * (i+1))-divider, divider * (i+1)).length-1]
+                  
+                  if(last_character != " " ){
+                    for(j=0;j<20;j++){
+                      divider=divider+1;
+                       last_character = paragraph.substring((divider * (i+1))-divider, divider * (i+1))[paragraph.substring((divider * (i+1))-divider, divider * (i+1)).length-1]
+                        if(last_character == " " || last_character == "<"){
+                            divider--;
+                           break;
+                        }
+                    }
+                  }
+                  console.log(divider);
+                  paragraph_arr.push('<div class="para" data-parag_index="' + i + '">'+paragraph.substring((divider * (i+1))-divider, divider * (i+1))+'</div>');
+                  new_paragraph += paragraph_arr[i];
+                  page_length =  paragraph_arr.length;
+          }
+         divider = wordLength;
+      return new_paragraph;
+      }
+  function get_lines(h,lh){
+        var divheight =  h ; 
+        var lineheight = lh ;
+       return Math.round(divheight/parseInt(lineheight));
+  }  
+</script>
+
