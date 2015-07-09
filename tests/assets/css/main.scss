@@ -1,0 +1,129 @@
+@mixin border-radius($radius) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-o-border-radius: $radius;
+	border-radius: $radius;
+	border-top-right-radius: $radius;
+	border-top-left-radius: $radius;
+	border-bottom-right-radius: $radius;
+	border-bottom-left-radius: $radius;
+}
+
+@mixin background-gradient($startColor, $endColor) {
+	background-image: -webkit-linear-gradient(top, $startColor, $endColor);
+	background-image: -moz-linear-gradient(top, $startColor, $endColor);
+	background-image: -ms-linear-gradient(top, $startColor, $endColor);
+	background-image: -o-linear-gradient(top, $startColor, $endColor);
+	background-image: linear-gradient(to bottom, $startColor, $endColor);
+}
+.container-fluid {
+	background-color:#70C2E8;
+
+	#stage {
+		width:80%;
+		height:80%;
+		margin-top:10px;
+		background-color:#fff;
+		border:10px solid #F2D748;
+		box-shadow:4px 12px 0px #9C862F;
+		position:relative;
+		@include border-radius(31px);
+
+		#icon-holder {
+			width:172px;
+			height:172px;
+			border:8px solid #02202F;
+			position:absolute;
+			top:-70px;
+			left:-70px;
+			background-color:#FEF5EC;
+			background-size:100%;
+			@include border-radius(172px);
+		}
+
+		#title-holder {
+			position:absolute;
+			top:-60px;
+			width:auto;
+			min-width:600px;
+			height:152px;
+			background-color:#007FAE;
+			@include background-gradient(#007FAE,#00678E);
+			border-top-right-radius: 62px;
+			border-bottom-right-radius: 62px;
+
+			#content {
+				position:absolute;
+				top:0;
+				left:112px;
+				font-family: 'Open Sans', sans-serif;
+
+				h2 {
+					color: #FAC861;
+					text-shadow: 2px 5px 0px #005D7D;
+					font-weight: 600;
+				}
+				p {
+					font-weight: 600;
+					color:white;
+					text-indent:3px;
+				}
+			}
+		}
+
+		#time-holder {
+			position: absolute;
+			top: 0;
+			right: 85px;
+			height: 38px;
+			width: 120px;
+			border-bottom-left-radius: 20px;
+			border-bottom-right-radius: 20px;
+			background-color: #F2D748;
+			font-family:'Montseratt', sans-serif;
+			font-size: 25px;
+			font-weight: bolder;
+			text-align:center;
+		}
+		#counter-holder {
+			position: absolute;
+			bottom: 0;
+			right: 95px;
+			height: 60px;
+			width: 68px;
+			border-top-left-radius: 37px;
+			border-top-right-radius: 37px;
+			background-color: #F2D748;
+			font-family: 'Montseratt', sans-serif;
+			font-size: 25px;
+			font-weight: bolder;
+			text-align: center;
+			padding-top: 14px;
+		}
+
+		#arrow-right {
+			width: 75px;
+			height: 75px;
+			background-image: url("abiva_assets/right.png");
+			position: absolute;
+			bottom: -41px;
+			right: 15px;
+			z-index: 9;
+			background-size: 100%;
+			cursor: pointer;
+		}
+
+		#arrow-left {
+		  	width: 75px;
+		 	height: 75px;
+		  	background-image: url("http://abiva.dev:8080/abiva_assets/left.png");
+		  	position: absolute;
+		  	bottom: -41px;
+		  	right: 168px;
+		  	z-index: 9;
+		  	background-size: 100%;
+		  	cursor: pointer;
+		}
+	}
+}
