@@ -1,0 +1,318 @@
+<section>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="paragraph" id="content">
+                she worked for two hours
+            </div>
+        </div>
+    </div>
+    <a href="#" class="btn_done">Done</a>
+    <!-- modals -->
+    <div class="overlay_in" style="display:none;width: 100%;height: 100%;position: absolute;top: 0px;right: 0px; background-color:rgba(0,0,0,.5); z-index: 100000;">
+        <div class="overlay_content">
+            <h1 style="  font-size: 60px;font-family: 'Montserrat', sans-serif; font-weight: bold;margin-top: 220px;">Are you done with all of the questions?</h1>
+            <a href="#" class="btn_box_end yes" style="margin-top:50px;margin-left:20px">YES</a>
+            <a href="#" class="btn_box_end no" style="margin-top:50px;margin-left:20px">NO</a>
+        </div>
+    </div>
+    <div class="overlay_scoring" style="display:none;width: 100%;height: 100%;position: absolute;top: 0px;right: 0px; background-color:rgba(0,0,0,.5); z-index: 100000;">
+        <img class="close_btn" src="abiva_assets/close.png" style="  position: absolute;top: 28px;right: 101px;width: 62px;height: 60px; cursor:pointer;">
+        <div class="overlay_content_scoring" style=" width: 80%; height: 81%;position: absolute;top: 80px;left: 145px;">
+            <h1 class="score" style="font-size: 68px;position: absolute;font-family: 'Montserrat', sans-serif;font-weight: bolder;top: 205px;left: 455px;color: #EDEDB1;">0</h1>
+            <img src="abiva_assets/catchup.png" wdith="100%" height="100%">
+        </div>
+    </div>
+     <div class="change_page_btns">
+      <span id="arrow-left" class="btn_left"></span>
+      <span id="arrow-right" class="btn_right"></span>
+    </div>
+</section>
+<style>
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 250px;
+}
+
+.paragraph {
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    border: 2px solid #EB8D33;
+    padding-bottom: 25px;
+    border-radius: 20px;
+    width: 100% !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    text-overflow: clip;
+}
+
+.fragment {
+    padding-left: 2.5px;
+    padding-right: 2.5px;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.fragment:hover {
+    background: #ccc;
+    transition: all 150ms ease-in-out;
+}
+
+p > .fragment:first-child {
+    padding-left: 15px;
+}
+
+.fragment.selected {
+    background: #A0A0A0;
+    color: #fff;
+}
+
+.btn_box_blue {
+    margin-left: 20px;
+}
+
+.choosen {
+    -webkit-filter: drop-shadow(5px 5px 30px #E4C17A);
+    filter: drop-shadow(5px 5px 30px #E4C17A);
+}
+
+.question_container {
+    display: none;
+}
+
+.question_container:first-child {
+    display: block;
+}
+
+.correct {
+    background: green;
+    color: white;
+}
+
+.wrong {
+    background: red;
+    color: white;
+}
+
+.na {
+    background: aliceblue;
+    color: white;
+}
+
+.btn_done {
+    /*display: none;*/
+    background: #199cdd;
+    background-image: -webkit-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -moz-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -ms-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -o-linear-gradient(top, #199cdd, #1079b2);
+    background-image: linear-gradient(to bottom, #199cdd, #1079b2);
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 4px 0px #00678E;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+    padding: 10px 55px 10px 55px;
+    text-decoration: none;
+    position: absolute;
+    left: 52px;
+    top: 250px;
+}
+
+.answers {
+    background: #ccc;
+    color: white;
+    margin-top: 5px;
+    padding: 5px;
+    border-radius: 40px;
+}
+
+.btn_done:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.overlay_content {
+    width: 80%;
+    height: 81%;
+    position: absolute;
+    top: 80px;
+    left: 145px;
+    background: -moz-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* FF3.6+ */
+
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #feed77), color-stop(100%, #ee9b0f));
+    /* Chrome,Safari4+ */
+
+    background: -webkit-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Chrome10+,Safari5.1+ */
+
+    background: -o-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Opera 11.10+ */
+
+    background: -ms-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* IE10+ */
+
+    background: linear-gradient(to bottom, #feed77 0%, #ee9b0f 100%);
+    /* W3C */
+}
+</style>
+<script>
+(function() {
+    $('.btn_left').hide();
+
+    var ad = currentActivityData;
+    var questions = ad.questions;
+    var answers = [];
+    var title = ad.title;
+    var instruction = ad.instruction;
+
+    var currentActivityIndex = 0;
+
+    var selected_words = [];
+    var results = init(questions.length);
+
+    var total = 0;
+
+    setCurrentCounter(currentActivityIndex + 1);
+    setLastCounter(questions.length);
+
+    setActivityTitle(title);
+    setActivityInstruction(instruction);
+    setActivityBtn("Next Activity", parseInt($("#activity_btn").attr("data-activity")) + 1);
+
+    $.each(questions, function(i, v) {
+        $('#content').append("<div class='question_container' align='left' data-content-index='" + i + "'>" + createFragmentsMultiline(v.question_text) + "</div>");
+
+        answers = v.question_answer;
+    });
+
+    $('.counter').show();
+    $('.timer').show();
+
+    $('.fragment').click(function() {
+        if ($(this).hasClass("selected")) {
+            $(this).removeClass('selected');
+            removeByValue(selected_words, $(this).text().trim());
+        } else {
+            $(this).addClass('selected');
+            selected_words.push($(this).text().trim());
+        }
+        console.log(selected_words,selected_words.length);
+
+    });
+
+    function checkActivity(){
+         var correct = 0;
+         $.each(answers, function(i,v){
+          $.each(selected_words, function(j,v){
+                    if(selected_words[j] == answers[i]){
+                        correct++;
+                            console.log('correct answers', answers[i]);
+                            console.log('correct answers counts',correct)
+                    }
+                    total = Math.round((correct / $('.answer_field').length) * 100);
+                //set_score(total);
+                //setProgressBadge(total);
+                $('.overlay_scoring').fadeIn();
+             });
+         });
+    }
+    $('.btn_done').click(function() {
+        $('.overlay_in').fadeIn();
+        //}
+    });
+    $('.yes').click(function() {
+        $('.overlay_in').hide();
+        console.log("btn done called");
+        checkActivity();
+        //if (selected_words.length == 10) {
+       /* $.each(selected_words, function(i, v) {
+            if (checkArray(answers[i], v)) {
+                //correct answer
+                $('[data-content-index="' + i + '"]').prepend("<div class='answers'> <img src='abiva_assets/correct.png'> <div>Answers: " + answers[i].join(", ") +
+                    "</div>" + "</div>");
+
+            } else if (v.length == 0) {
+                $('[data-content-index="' + i + '"]').prepend("<div class='answers'> <img src='abiva_assets/NA.png'>Answers: " + answers[i].join(", ") + "</div>");
+            } else {
+                $('[data-content-index="' + i + '"]').prepend("<div class='answers'> <img src='abiva_assets/wrong.png'>Answers: " + answers[i].join(", ") + "</div>");
+            }
+        });*/
+    });
+    $('.close_btn').click(function() {
+      /*  $(this).parent().hide();
+        $('.overlay_progress').fadeIn();
+         $('.overlay_scoring').hide();
+
+         showProgress(total, createProgressReport());
+
+        retake_multi_selection();*/
+    });
+    $('.no').click(function() {
+        $('.overlay_in').hide();
+    });
+    $('.btn_right').click(function() {
+        console.log("natawag btn_right");
+
+        $('[data-content-index="' + currentActivityIndex + '"]').hide();
+
+        currentActivityIndex++;
+
+        $('[data-content-index="' + (currentActivityIndex) + '"]').show();
+
+        if (currentActivityIndex == (questions.length - 1)) {
+            $(this).hide();
+            $('.btn_left').show();
+            $('.btn_done').show();
+        }
+        setCurrentCounter(currentActivityIndex + 1);
+    });
+
+    $('.btn_left').click(function() {
+        console.log("natawag btn_left");
+
+        $('[data-content-index="' + currentActivityIndex + '"]').hide();
+        currentActivityIndex--;
+        $('[data-content-index="' + (currentActivityIndex) + '"]').show();
+        if (currentActivityIndex == 0) {
+            $(this).hide();
+            $('.btn_right').show();
+
+        }
+        $('.btn_done').hide();
+        setCurrentCounter(currentActivityIndex + 1);
+    });
+
+
+})();
+
+
+function createFragmentsMultiline(content) {
+    var html = "";
+    var d = content;
+    //get paragraphs
+    var d_paragraphs = d.split("#");
+    //get words per paragraph;
+    $.each(d_paragraphs, function(x, y) {
+        html += "<p>";
+        var words = y.split(" ");
+        $.each(words, function(i, v) {
+            html += "<span class='fragment' data-value='" + v.toLowerCase() + "'>" + v + "</span>";
+        });
+        html += "</p>";
+    });
+    return html;
+}
+</script>

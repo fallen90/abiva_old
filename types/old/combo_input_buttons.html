@@ -1,0 +1,123 @@
+<section>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="sentence">
+                Madrid recently became an important city.
+            </h3>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:5%">
+            <div class="col-xs-4 col-xs-offset-2 ">
+                <h3>adverb</h3>
+                <div class="box box-orange" id="adverb"></div>
+            </div>
+            <div class="col-xs-4">
+                <h3>word it modifies</h3>
+                <div class="box box-blue" id="modify"></div>
+            </div>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:5%">
+            <a href="#" class="btn_box_blue">verb</a>
+            <a href="#" class="btn_box_blue" style="margin-left:20px">adjective</a>
+            <a href="#" class="btn_box_blue" style="margin-left:20px">adverb</a>
+        </div>
+    </div>
+</section>
+<style>
+.box {
+    padding-bottom: 27px;
+    padding-top: 25px;
+    border-radius: 20px;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+.box-orange {
+    border: 3px solid #EB8D33;
+}
+
+.box-blue {
+    border: 3px solid #0097D7;
+}
+
+.fragment {
+    padding: 2px 7px;
+    cursor: pointer;
+    border-radius: 20px;
+}
+
+.fragment:hover {
+    background: #eee;
+    transition: all 250ms ease-in-out;
+}
+
+.fragment_box {
+    padding: 5px 15px;
+    font-size: 27px;
+    border-radius: 20px;
+    display: block;
+}
+
+.fragment_box-orange {
+    background: #FAE5BA;
+}
+
+.fragment_box-blue {
+    background: #0097D7;
+    color: white;
+}
+
+.fragment_box > .fa {
+    padding: 5px;
+    cursor: pointer;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Calibri";
+}
+
+.adverb {
+    background: #FAE5BA;
+}
+
+.modify {
+    background: #0097D7;
+}
+
+.choosen {
+    -webkit-filter: drop-shadow(5px 5px 30px #E4C17A);
+    filter: drop-shadow(5px 5px 30px #E4C17A);
+}
+</style>
+<script>
+(function() {
+
+    var sentence_frags = $('.sentence').text().trim().split(" ");
+    var fragments = "";
+    $.each(sentence_frags, function(i, v) {
+        fragments += "<span class='fragment'>" + v + "</span> ";
+    });
+    $('.sentence').html($(fragments));
+    $('.btn_box_blue').click(function() {
+        $('.btn_box_blue').removeClass("choosen");
+        $(this).addClass("choosen");
+        $('.answer_field').html($(this).text());
+    });
+    $('.fragment').click(function() {
+        var txt = $(this).text();
+        var template = "<span class='fragment_box'>" + txt + "</span>";
+        var adverb = $('#adverb').html();
+        var modify = $('#modify').html();
+        if (adverb == "") {
+            $('#adverb').html($(template).addClass("fragment_box-orange"));
+        } else if (modify == "") {
+            $('#modify').html($(template).addClass("fragment_box-blue"));
+
+        } else if (adverb !== "" && modify !== "") {
+            $('#adverb').html($(template).addClass("fragment_box-orange"));
+            $('#modify').html("");
+        }
+    });
+})();
+</script>

@@ -1,0 +1,128 @@
+<section>
+    <div class="row">
+        <div class="col-xs-12" id="text_container">
+            <div class="description" id="content" style="font-family: 'Montserrat', sans-serif;"></div>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:-15%" id="tabs"></div>
+    </div>
+</section>
+<style>
+.btn_box_yellow {
+    -webkit-border-radius: 25;
+    -moz-border-radius: 25;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    background: #FDC00F;
+    padding: 14px 0px 14px 0px;
+    border: solid #7F610A 4px;
+    text-decoration: none !important;
+    display: block;
+    margin-top: -22.5% !important;
+    margin-bottom: 26.5% !important;
+    margin-left: -96.5%!important;
+    width: 21%;
+}
+
+.btn_orange {
+    -webkit-border-radius: 25;
+    -moz-border-radius: 25;
+    border-radius: 25px;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 23px;
+    background: #A37900;
+    padding: 15px 40px 15px 40px;
+    border: solid #7F610A 4px;
+    text-decoration: none !important;
+    display: block;
+    margin-top: -22.5% !important;
+    margin-bottom: 26.5% !important;
+    margin-left: -96.5%!important;
+    width: 21%;
+}
+
+.btn_box_yellow:hover {
+    font-color: #ffffff !important;
+}
+
+.btn_orange:hover {
+    font-color: #ffffff !important;
+}
+
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 250px;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+    text-align: left;
+    margin-left: 20px;
+}
+
+#content {
+    font-size: 24px;
+    text-align: left;
+    text-overflow: clip;
+    overflow: auto;
+    height: 413px;
+}
+
+#text_container {
+    /*
+*/
+    
+    padding-bottom: 25px;
+    padding-top: 20px;
+    border-radius: 20px;
+    width: 71% !important;
+    height: 453px !important;
+    margin-left: 210px !important;
+    padding-right: 3px !important;
+}
+
+.choosen {
+    color: #ffffff !important;
+    background: #02202F !important;
+}
+
+[data-content-index] {
+    visiblity: none;
+}
+
+[data-index] {
+    position: relative;
+    font-size: 20px !important;
+    padding: 14px 0px 14px 0px !important;
+}
+
+[data-index] > img {
+    position: absolute;
+    top: 15%;
+    left: -17px;
+    display: none;
+}
+</style>
+<script>
+(function() {
+
+    //hide components
+    $('.btn_left').hide();
+    $('.btn_right').hide();
+
+    $('.counter').hide();
+    $('.timer').hide();
+
+    $('.description > [data-content-index]').hide();
+    //load json via click
+    $('#tabs > [data-index]').click(function() {
+
+    });
+
+})();
+</script>

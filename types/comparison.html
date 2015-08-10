@@ -1,0 +1,63 @@
+<section>
+    <div class="row">
+        <div class="col-xs-12">
+            <h3 class="sentence">Cordilleranos were the <div class="answer_field"></div> settlers of the region around Baguio.</h3>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:5%">
+            <a href="#" class="btn_box_blue">first</a>
+            <a href="#" class="btn_box_blue" style="margin-left:20px">firstly</a>
+        </div>
+        <div class="col-xs-12 " align="center">
+            <div class="selection">
+                <a href="#" class="btn_box_orange choosen">adjective</a>
+                <a href="#" class="btn_box_orange" style="margin-left:20px">adverb</a>
+            </div>
+        </div>
+    </div>
+</section>
+<style>
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 200px;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Calibri";
+}
+
+.selection {
+    background: #95C2D6;
+    border-radius: 20px;
+    margin-top: 5%;
+    padding: 15px 0px 17px 0px;
+}
+
+.choosen {
+    -webkit-filter: drop-shadow(5px 5px 30px #E4C17A);
+    filter: drop-shadow(5px 5px 30px #E4C17A);
+}
+</style>
+<script>
+(function() {
+
+    var totalItemWidth = 0;
+    $.each($('.btn_box_orange'), function(i, v) {
+        totalItemWidth += $(v).width();
+    });
+    console.log(totalItemWidth);
+    $('.selection').width((totalItemWidth + 20) * 3);
+
+    $('.btn_box_orange').click(function() {
+        $('.btn_box_orange').removeClass("choosen");
+        $(this).addClass("choosen");
+    });
+    $('.btn_box_blue').click(function() {
+        $('.btn_box_blue').removeClass("choosen");
+        $(this).addClass("choosen");
+        $('.answer_field').html($(this).text());
+    });
+})();
+</script>

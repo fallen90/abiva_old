@@ -1,0 +1,283 @@
+<!--
+    pool of words multiple answer 2 template
+    #answers = pool
+    #content = container
+-->
+<section>
+    <div class="row">
+        <div class="col-xs-12">
+            <div id="content" class="sentence"></div>
+        </div>
+        <div class="col-xs-12" align="center" style="margin-top:5%" id="answers"></div>
+    </div>
+    <a href="#" class="btn_done">Done</a>
+    <!-- modals -->
+    <div class="overlay_in" style="display:none;width: 100%;height: 100%;position: absolute;top: 0px;right: 0px; background-color:rgba(0,0,0,.5); z-index: 100000;">
+        <div class="overlay_content">
+            <h1 style="  font-size: 60px;font-family: 'Montserrat', sans-serif; font-weight: bold;margin-top: 220px;">Are you done with all of the questions?</h1>
+            <a href="#" class="btn_box_end yes" style="margin-top:50px;margin-left:20px">YES</a>
+            <a href="#" class="btn_box_end no" style="margin-top:50px;margin-left:20px">NO</a>
+        </div>
+    </div>
+    <div class="overlay_scoring" style="display:none;width: 100%;height: 100%;position: absolute;top: 0px;right: 0px; background-color:rgba(0,0,0,.5); z-index: 100000;">
+        <img class="close_btn" src="abiva_assets/close.png" style="  position: absolute;top: 28px;right: 101px;width: 62px;height: 60px; cursor:pointer;">
+        <div class="overlay_content_scoring" style=" width: 80%; height: 81%;position: absolute;top: 80px;left: 145px;">
+            <h1 class="score" style="font-size: 68px;position: absolute;font-family: 'Montserrat', sans-serif;font-weight: bolder;top: 205px;left: 455px;color: #EDEDB1;">0</h1>
+            <img src="abiva_assets/catchup.png" wdith="100%" height="100%">
+        </div>
+    </div>
+     <div class="change_page_btns">
+      <span id="arrow-left" class="btn_left"></span>
+      <span id="arrow-right" class="btn_right"></span>
+    </div>
+</section>
+<style>
+.answer_field {
+    border-bottom: 3px solid #111;
+    display: inline-block;
+    width: 200px;
+}
+
+.question_container {
+    display: none;
+}
+
+.question_container:first-child {
+    display: block;
+}
+
+[data-content-answer-group] {
+    display: none;
+}
+
+[data-content-answer-group]:first-child {
+    display: block;
+}
+
+.sentence {
+    font-size: 30px;
+    font-weight: bold;
+    font-family: "Calibri";
+    margin: 0 auto;
+}
+
+.selection {
+    background: #95C2D6;
+    border-radius: 20px;
+    margin-top: 5%;
+    padding: 15px 0px 17px 0px;
+}
+
+.btn_done {
+    display: none;
+    background: #199cdd;
+    background-image: -webkit-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -moz-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -ms-linear-gradient(top, #199cdd, #1079b2);
+    background-image: -o-linear-gradient(top, #199cdd, #1079b2);
+    background-image: linear-gradient(to bottom, #199cdd, #1079b2);
+    -webkit-border-radius: 11;
+    -moz-border-radius: 11;
+    border-radius: 11px;
+    -webkit-box-shadow: 0px 1px 3px #666666;
+    -moz-box-shadow: 0px 1px 3px #666666;
+    box-shadow: 0px 4px 0px #00678E;
+    font-family: 'Montserrat', sans-serif;
+    color: #ffffff;
+    font-size: 30px;
+    padding: 10px 55px 10px 55px;
+    text-decoration: none;
+    position: absolute;
+    left: 52px;
+    top: 250px;
+}
+
+.btn_done:hover {
+    background: #3cb0fd;
+    background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+    background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+    text-decoration: none;
+}
+
+.overlay_content {
+    width: 80%;
+    height: 81%;
+    position: absolute;
+    top: 80px;
+    left: 145px;
+    background: -moz-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* FF3.6+ */
+    
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #feed77), color-stop(100%, #ee9b0f));
+    /* Chrome,Safari4+ */
+    
+    background: -webkit-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Chrome10+,Safari5.1+ */
+    
+    background: -o-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* Opera 11.10+ */
+    
+    background: -ms-linear-gradient(top, #feed77 0%, #ee9b0f 100%);
+    /* IE10+ */
+    
+    background: linear-gradient(to bottom, #feed77 0%, #ee9b0f 100%);
+    /* W3C */
+}
+
+.answer {
+    margin: 5px auto;
+    border: 2px solid #111;
+    width: 50%;
+    height: 45px;
+    border-radius: 20px;
+}
+
+.btn_box_orange,
+.btn_box_blue {
+    margin-top: 10px;
+}
+</style>
+<script>
+(function() {
+    $('.btn_left').hide();
+    $('.counter').show();
+    $('.timer').show();
+
+    console.log(currentActivityData);
+    var ad = currentActivityData;
+    var questions = ad.questions;
+    var answers = [];
+    var title = ad.title;
+    var instruction = ad.instruction;
+
+    var currentActivityIndex = 0;
+
+    var user_answers = init(questions.length);
+
+
+    setCurrentCounter(currentActivityIndex + 1);
+    setLastCounter(questions.length);
+
+    setActivityTitle(title);
+    setActivityInstruction(instruction);
+    setActivityBtn("Next Activity", parseInt($("#activity_btn").attr("data-activity")) + 1);
+
+
+    $.each(questions, function(i, v) {
+        var answer_fields = "<div class='answer' data-answer='0'></div> <div class='answer' data-answer='1'></div>";
+        var ans = "";
+
+        $('#content').append("<div class='question_container' data-content-index='" + i + "'> <div class='question'>" + v.question_text + "</div> " + answer_fields + " </div>");
+
+        $.each(v.question_choices, function(x, y) {
+            ans += ('<a href="#" class="btn_box_blue" style="margin-left:20px">' + y + '</a>');
+        });
+
+        $('#answers').append("<div data-content-answer-group='" + i + "'>" + ans + "</div>");
+
+        answers[i] = (v.question_answer);
+        console.log("Answers", answers);
+    });
+
+    $('.btn_box_blue').click(function() {
+        // $(this).parent().find(".btn_box_orange").removeClass("btn_box_orange");
+        // $(this).addClass("btn_box_orange");
+        //get datagroup of button
+        var id = parseInt($(this).parent().attr("data-content-answer-group"));
+
+        var txt = $(this).text();
+        var template = "<span class='fragment_box'>" + txt + "</span>";
+
+        var answer_box1 = $('[data-content-index="' + $(this).parent().attr("data-content-answer-group") + '"] > [data-answer="0"]');
+        var answer_box2 = $('[data-content-index="' + $(this).parent().attr("data-content-answer-group") + '"] > [data-answer="1"]');
+        var answer_box1_contents = answer_box1.html();
+        var answer_box2_contents = answer_box2.html();
+
+        if (answer_box1_contents == "") {
+            answer_box1.html($(template).addClass("fragment_box-orange"));
+            user_answers[id][0] = $(this).text().trim();
+        } else
+        if (answer_box2_contents == "") {
+            answer_box2.html($(template).addClass("fragment_box-blue"));
+            user_answers[id][1] = $(this).text().trim();
+        } else if (answer_box1_contents !== "" && answer_box2_contents !== "") {
+            answer_box1.html($(template).addClass("fragment_box-orange"));
+            answer_box2.html("");
+            user_answers[id][0] = $(this).text().trim();
+        }
+        console.log("userAnswers", user_answers);
+    });
+
+    $('.btn_right').click(function() {
+        console.log("natawag btn_right");
+
+        $('[data-content-index="' + currentActivityIndex + '"]').hide();
+        $('[data-content-answer-group="' + currentActivityIndex + '"]').hide();
+
+        currentActivityIndex++;
+
+        $('[data-content-index="' + (currentActivityIndex) + '"]').show();
+        $('[data-content-answer-group="' + (currentActivityIndex) + '"]').show();
+
+        if (currentActivityIndex == (questions.length - 1)) {
+            $(this).hide();
+            $('.btn_left').show();
+            $('.btn_done').show();
+        }
+        setCurrentCounter(currentActivityIndex + 1);
+    });
+
+    $('.btn_left').click(function() {
+        console.log("natawag btn_left");
+
+        $('[data-content-index="' + currentActivityIndex + '"]').hide();
+        $('[data-content-answer-group="' + currentActivityIndex + '"]').hide();
+        currentActivityIndex--;
+        $('[data-content-index="' + (currentActivityIndex) + '"]').show();
+        $('[data-content-answer-group="' + (currentActivityIndex) + '"]').show();
+        if (currentActivityIndex == 0) {
+            $(this).hide();
+            $('.btn_right').show();
+
+        }
+        $('.btn_done').hide();
+        setCurrentCounter(currentActivityIndex + 1);
+    });
+
+    $('.btn_done').click(function() {
+        $('.overlay_in').fadeIn();
+        //}
+    });
+    $('.yes').click(function() {
+        $('.overlay_in').hide();
+        console.log("btn done called");
+        //if (selected_words.length == 10) {
+        var correct = 0;
+        $.each(user_answers, function(i, v) {
+            if (checkArray(user_answers[i], answers[i])) {
+                $('[data-content-index="' + i + '"]').append("<div class='answers'> <img src='abiva_assets/correct.png'> <div style='font-size:15px'>Answer: " + answers[i] +
+                    "</div>" + "</div>");
+                correct++;
+            } else if (user_answers[i].length == 0) {
+                $('[data-content-index="' + i + '"]').append("<div class='answers'> <img src='abiva_assets/NA.png'> <div style='font-size:15px'>Answer: " + answers[i] +
+                    "</div>" + "</div>");
+            } else {
+                $('[data-content-index="' + i + '"]').append("<div class='answers'> <img src='abiva_assets/wrong.png'> <div style='font-size:15px'>Answer: " + answers[i] +
+                    "</div>" + "</div>");
+            }
+        });
+        var total = (correct / questions.length) * 100;
+        set_score(total);
+        $('.overlay_scoring').fadeIn();
+    });
+    $('.no').click(function() {
+        $('.overlay_in').hide();
+    });
+    $('.close_btn').click(function() {
+        $(this).parent().hide();
+    });
+})();
+</script>
