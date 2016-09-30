@@ -1,0 +1,4 @@
+<div class="contents-directive">
+	<div class="contents-inner" ng-bind-html='content_sliced | to_trusted'></div>
+	<a ng-show="contents.length - 1 " class="btn btn-default" ng-click="changePage($index)" ng-repeat='content in contents' ng-class="{btn-info:activePage == $index}">{{$index + 1}}</a>
+</div>

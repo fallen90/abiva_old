@@ -1,0 +1,15 @@
+<div class="activity-content">
+	<div class="tutorials" ng-controller="TutorialCtrl as tuts">
+		<div class="tabs">
+			<ul class="tab-titles">
+				<li ng-repeat="tab in activity.tutorial" class="active">
+					<a class="tab-title">{{tab.title}}</a>
+					<img src="../abiva_assets/checkMark.png" class="checkmark">
+				</li>
+			</ul>
+			<div class="tab-contents">
+				<div class="tab-content" ng-show='' ng-bind-html="tab.content | to_trusted"  ng-repeat="tab in activity.tutorial"></div>
+			</div>
+		</div>
+	</div>
+</div>

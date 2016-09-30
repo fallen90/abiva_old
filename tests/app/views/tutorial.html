@@ -1,0 +1,15 @@
+<div class="activity-content">
+	<div class="tutorials">
+		<div class="tabs">
+			<ul class="tab-titles">
+				<li ng-repeat="tab in content_pages" class="active">
+					<a class="tab-title" href="#/{{module_number}}/tutorials/{{$index}}">{{tab.title}}</a>
+					<img src="../abiva_assets/checkMark.png" class="checkmark" ng-show="{{$index == activeTut}}">
+				</li>
+			</ul>
+			<div class="tab-contents">
+				<div class="tab-content" tab-content="tab.content"  ng-repeat="tab in content_pages" ng-show="{{$index == activeTut}}"></div>
+			</div>
+		</div>
+	</div>
+</div>
